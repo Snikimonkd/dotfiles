@@ -72,9 +72,9 @@ return require('packer').startup(function(use)
     -- git
     use('lewis6991/gitsigns.nvim')
 
-    -- показывать тест ошибок в вирутальных строках
-    use {
-        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    }
+--    -- показывать тест ошибок в вирутальных строках
+--    use {
+--        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+--    }
 
 end)

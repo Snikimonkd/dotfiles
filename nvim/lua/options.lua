@@ -35,6 +35,7 @@ require("gruvbox").setup({
 
 -- цветовая тема
 vim.cmd.colorscheme 'gruvbox'
+-- vim.cmd.colorscheme 'melange'
 -- темная тема
 vim.o.background = "dark" -- or "light" for light mode
 
@@ -58,7 +59,7 @@ vim.cmd("autocmd BufEnter * set formatoptions-=cro")
 vim.cmd("autocmd BufEnter * setlocal formatoptions-=cro")
 
 -- ищет подсказки в незаимпорченных пакетах
-vim.g.go_gopls_complete_unimported = 'true' 
+vim.g.go_gopls_complete_unimported = 1
 
 -- Highlight some more stuff
 vim.g.go_highlight_types = 1

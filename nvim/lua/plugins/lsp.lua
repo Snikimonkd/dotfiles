@@ -6,6 +6,18 @@ require('mason-lspconfig').setup({
     }
 })
 
+vim.diagnostic.config({
+    virtual_lines = true,
+    virtual_text = true,
+})
+
+local keymap = vim.keymap
+
+keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lsp_attach = function(client, bufnr)
