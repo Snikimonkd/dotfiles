@@ -16,3 +16,5 @@ keymap.set("n", "<leader>mp", ":BufferMovePrevious<CR>")
 -- подвинуть буфер впарво 
 keymap.set("n", "<leader>mn", ":BufferMoveNext<CR>")
 
+-- запустить зен мод
+keymap.set("n", "<leader>z", ":ZenMode<CR>")

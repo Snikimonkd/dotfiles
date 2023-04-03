@@ -10,8 +10,11 @@ return require('packer').startup(function(use)
     use { 'nvim-treesitter/nvim-treesitter-textobjects' }
 
     -- цветовая тема
-    use {"savq/melange-nvim"}
-    
+    use {'savq/melange-nvim'}
+    use {'gilgigilgil/anderson.vim'}
+    use {'nightsense/carbonized'}
+    use {'whatyouhide/vim-gotham'}
+
     -- автодополнения
     use {
         'hrsh7th/nvim-cmp',
@@ -70,7 +73,20 @@ return require('packer').startup(function(use)
     }
 
     -- git
-    use('lewis6991/gitsigns.nvim')
+    use {'lewis6991/gitsigns.nvim'}
+
+    use {
+        "folke/zen-mode.nvim",
+        config = function()
+            require("zen-mode").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    }
+
+
 
 --    -- показывать тест ошибок в вирутальных строках
 --    use {

@@ -36,6 +36,18 @@ require("gruvbox").setup({
 -- цветовая тема
 vim.cmd.colorscheme 'gruvbox'
 -- vim.cmd.colorscheme 'melange'
+-- vim.cmd.colorscheme 'alduin'
+--vim.cmd.colorscheme 'anderson'
+-- vim.cmd.colorscheme 'carbonized-dark'
+-- vim.cmd.colorscheme 'focus'
+-- vim.cmd.colorscheme 'gotham'
+-- vim.cmd.colorscheme 'hacker'
+-- vim.cmd.colorscheme 'jelly'
+-- vim.cmd.colorscheme 'mount-gery'
+-- vim.cmd.colorscheme 'mount'
+
+
+
 -- темная тема
 vim.o.background = "dark" -- or "light" for light mode
 

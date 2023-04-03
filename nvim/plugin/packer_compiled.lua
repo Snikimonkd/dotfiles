@@ -79,10 +79,20 @@ _G.packer_plugins = {
     path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["anderson.vim"] = {
+    loaded = true,
+    path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/anderson.vim",
+    url = "https://github.com/gilgigilgil/anderson.vim"
+  },
   ["barbar.nvim"] = {
     loaded = true,
     path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/barbar.nvim",
     url = "https://github.com/romgrk/barbar.nvim"
+  },
+  carbonized = {
+    loaded = true,
+    path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/carbonized",
+    url = "https://github.com/nightsense/carbonized"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
@@ -98,11 +108,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
-  },
-  ["lsp_lines.nvim"] = {
-    loaded = true,
-    path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/lsp_lines.nvim",
-    url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
   },
   ["lsp_signature.nvim"] = {
     loaded = true,
@@ -179,10 +184,25 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["vim-gotham"] = {
+    loaded = true,
+    path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/vim-gotham",
+    url = "https://github.com/whatyouhide/vim-gotham"
+  },
+  ["zen-mode.nvim"] = {
+    config = { "\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rzen-mode\frequire\0" },
+    loaded = true,
+    path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
+    url = "https://github.com/folke/zen-mode.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: zen-mode.nvim
+time([[Config for zen-mode.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rzen-mode\frequire\0", "config", "zen-mode.nvim")
+time([[Config for zen-mode.nvim]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
 try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
