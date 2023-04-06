@@ -75,18 +75,8 @@ return require('packer').startup(function(use)
     -- git
     use {'lewis6991/gitsigns.nvim'}
 
-    use {
-        "folke/zen-mode.nvim",
-        config = function()
-            require("zen-mode").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
-        end
-    }
-
-
+    -- zenmode
+    use { 'folke/zen-mode.nvim'}
 
 --    -- показывать тест ошибок в вирутальных строках
 --    use {

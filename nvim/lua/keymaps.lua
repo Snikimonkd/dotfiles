@@ -18,3 +18,7 @@ keymap.set("n", "<leader>mn", ":BufferMoveNext<CR>")
 
 -- запустить зен мод
 keymap.set("n", "<leader>z", ":ZenMode<CR>")
+
+
+-- Clear search highlighting with <leader> and /
+keymap.set('n', '<leader>/', ':nohl<CR>')

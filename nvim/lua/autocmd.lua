@@ -9,7 +9,6 @@ autocmd('CmdlineEnter', {
 autocmd('TermOpen', {
   command = 'setlocal listchars= nonumber norelativenumber nocursorline',
 })
-
 autocmd('TermOpen', {
   pattern = '',
   command = 'startinsert'
@@ -20,3 +19,4 @@ autocmd('BufLeave', {
   pattern = 'term://*',
   command = 'stopinsert'
 })
+

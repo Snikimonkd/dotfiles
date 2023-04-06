@@ -17,4 +17,7 @@ require("nvim-tree").setup({
             diagnostics = true,
         },
     },
+    git = {
+        ignore = false,
+    },
 })
