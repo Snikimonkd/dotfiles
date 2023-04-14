@@ -22,3 +22,11 @@ keymap.set("n", "<leader>z", ":ZenMode<CR>")
 
 -- Clear search highlighting with <leader> and /
 keymap.set('n', '<leader>/', ':nohl<CR>')
+
+
+local opts = { noremap = true, silent = true }
+-- запустить ближайший тест
+keymap.set('n', '<leader>s', function() require('neotest').run.run() end, opts)
+
+-- показать вывод тестов
+keymap.set('n', '<leader>a', function() require('neotest').output_panel.open() end, opts)

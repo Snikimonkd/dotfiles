@@ -16,9 +16,9 @@ vim.opt.clipboard = 'unnamedplus'
 -- настройки для цветовой темы
 vim.opt.termguicolors = true
 require("gruvbox").setup({
-  inverse = true, -- invert background for search, diffs, statuslines and errors
-  contrast = "soft", -- can be "hard", "soft" or empty string
-  palette_overrides = {},
+    inverse = true, -- invert background for search, diffs, statuslines and errors
+    contrast = "soft", -- can be "hard", "soft" or empty string
+    palette_overrides = {},
 })
 
 -- цветовая тема
