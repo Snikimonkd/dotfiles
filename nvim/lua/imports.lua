@@ -54,6 +54,9 @@ return require('packer').startup(function(use)
         config = function() require("nvim-autopairs").setup {} end
     }
 
+    -- выделяет одинаковые скобочки
+    use {'lukas-reineke/indent-blankline.nvim'}
+
     -- статус лайн внизу
     use {
         'nvim-lualine/lualine.nvim',
@@ -78,7 +81,7 @@ return require('packer').startup(function(use)
     -- zenmode
     use { 'folke/zen-mode.nvim'}
 
---    -- показывать тест ошибок в вирутальных строках
+--    -- показывать текст ошибок в вирутальных строках
 --    use {
 --        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 --    }
@@ -92,34 +95,24 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- путь до бинаря с тэмплэйтами для табличных тестов
-    --    vim.g.gotests_bin = '/Users/slukash/go/bin/gotests'
+    -- для тестов
+    use {'fatih/vim-go'}
+    use {'rfratto/vim-go-testify'}
 
+    -- запускает тесты
     use({
         "nvim-neotest/neotest",
         requires = {
             "nvim-neotest/neotest-go",
         },
-        config = function()
-            -- get neotest namespace (api call creates or returns namespace)
-            local neotest_ns = vim.api.nvim_create_namespace("neotest")
-            vim.diagnostic.config({
-                virtual_text = {
-                    format = function(diagnostic)
-                        local message =
-                        diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
-                        return message
-                    end,
-                },
-            }, neotest_ns)
-            require("neotest").setup({
-                -- your neotest config here
-                adapters = {
-                    require("neotest-go")({
-                    }),
-                },
-            })
-        end,
+        require("neotest").setup({
+            adapters = {
+                require("neotest-go")({
+                    experimental = {
+                        test_table = true,
+                    },
+                })
+            }
+        })   
     })
-
 end)
