@@ -26,7 +26,14 @@ keymap.set('n', '<leader>/', ':nohl<CR>')
 
 local opts = { noremap = true, silent = true }
 -- запустить ближайший тест
-keymap.set('n', '<leader>s', function() require('neotest').run.run() end, opts)
+keymap.set('n', '<leader>gt', function() require('neotest').run.run() end, opts)
 
 -- показать вывод тестов
-keymap.set('n', '<leader>a', function() require('neotest').output_panel.open() end, opts)
+keymap.set('n', '<leader>r', function() require('neotest').output_panel.open() end, opts)
+
+-- сгенерить uuid
+keymap.set('n', "<leader>u", ":r! uuidgen | tr '[:upper:]' '[:lower:]'<CR>")
+
+-- вывести все конфликты
+keymap.set('n', '<leader>lc', ":GitConflictListQf<CR>")
+

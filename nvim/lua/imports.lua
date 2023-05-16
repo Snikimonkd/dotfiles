@@ -71,8 +71,8 @@ return require('packer').startup(function(use)
 
     -- поиск по файлам
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
-        requires = {'nvim-lua/plenary.nvim'}
+        'nvim-lua/plenary.nvim',
+        'nvim-telescope/telescope.nvim', tag = '0.1.1'
     }
 
     -- git
@@ -80,11 +80,6 @@ return require('packer').startup(function(use)
 
     -- zenmode
     use { 'folke/zen-mode.nvim'}
-
---    -- показывать текст ошибок в вирутальных строках
---    use {
---        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
---    }
 
     -- генерит табличные тесты
     use {
@@ -104,15 +99,47 @@ return require('packer').startup(function(use)
         "nvim-neotest/neotest",
         requires = {
             "nvim-neotest/neotest-go",
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "antoinemadec/FixCursorHold.nvim"
         },
-        require("neotest").setup({
-            adapters = {
-                require("neotest-go")({
-                    experimental = {
-                        test_table = true,
-                    },
-                })
-            }
-        })   
+        config = function()
+            local neotest_ns = vim.api.nvim_create_namespace("neotest")
+            vim.diagnostic.config({
+                virtual_text = {
+                    format = function(diagnostic)
+                        local message =
+                        diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+                        return message
+                    end,
+                },
+            }, neotest_ns)
+            require("neotest").setup({
+                -- your neotest config here
+                adapters = {
+                    require("neotest-go")({
+                        experimental = {
+                            test_table = true,
+                        },
+                    }),
+                },
+            })
+        end,
     })
+
+    -- минимапа сверху справа
+    use {
+        'gorbit99/codewindow.nvim',
+        config = function()
+            local codewindow = require('codewindow')
+            codewindow.setup()
+            codewindow.apply_default_keybinds()
+        end,
+    }
+
+
+    -- мердж конфликты
+    use {'akinsho/git-conflict.nvim', tag = "*", config = function()
+        require('git-conflict').setup()
+    end}
 end)
