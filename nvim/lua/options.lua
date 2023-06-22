@@ -21,8 +21,12 @@ require("gruvbox").setup({
     palette_overrides = {},
 })
 
+-- для уветовой темы
+vim.g.gruvbox_baby_transparent_mode = 1
+
 -- цветовая тема
-vim.cmd.colorscheme 'gruvbox'
+--vim.cmd.colorscheme 'gruvbox'
+vim.cmd.colorscheme 'gruvbox-baby'
 -- vim.cmd.colorscheme 'melange'
 -- vim.cmd.colorscheme 'alduin'
 --vim.cmd.colorscheme 'anderson'
@@ -37,7 +41,7 @@ vim.cmd.colorscheme 'gruvbox'
 
 
 -- темная тема
-vim.o.background = "dark" -- or "light" for light mode
+-- vim.o.background = "dark" -- or "light" for light mode
 
 -- количество табов = 4
 vim.opt.tabstop = 4

@@ -37,3 +37,5 @@ keymap.set('n', "<leader>u", ":r! uuidgen | tr '[:upper:]' '[:lower:]'<CR>")
 -- вывести все конфликты
 keymap.set('n', '<leader>lc', ":GitConflictListQf<CR>")
 
+-- переход в NORMAL на ESC в терминале
+keymap.set('t', '<Esc>', '<C-\\><C-n>')
