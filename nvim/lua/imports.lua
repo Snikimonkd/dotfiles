@@ -26,7 +26,7 @@ return require('packer').startup(function(use)
         "ray-x/lsp_signature.nvim",
     }
 
-    -- чтобы автодополнения работали
+   -- чтобы автодополнения работали
     use {
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
@@ -94,6 +94,9 @@ return require('packer').startup(function(use)
     use {'fatih/vim-go'}
     use {'rfratto/vim-go-testify'}
 
+    -- выделяет такие же слова как слово под курсором
+    use {'RRethy/vim-illuminate'}
+
     -- запускает тесты
     use({
         "nvim-neotest/neotest",
@@ -127,10 +130,6 @@ return require('packer').startup(function(use)
             codewindow.apply_default_keybinds()
         end,
     }
-
-    -- другой грувбокс
-    use {'luisiacc/gruvbox-baby'}
-
 
     -- мердж конфликты
     use {'akinsho/git-conflict.nvim', tag = "*", config = function()

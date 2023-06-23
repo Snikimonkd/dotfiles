@@ -11,4 +11,4 @@ require('plugins.treesitter')
 require('plugins.telescope')
 require('plugins.git')
 require('plugins.zenmode')
-
+require('plugins.vim-illuminate')

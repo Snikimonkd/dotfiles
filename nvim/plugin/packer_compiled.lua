@@ -134,11 +134,6 @@ _G.packer_plugins = {
     path = "/Users/slukash/.local/share/nvim/site/pack/packer/opt/gotests.nvim",
     url = "https://github.com/yanskun/gotests.nvim"
   },
-  ["gruvbox-baby"] = {
-    loaded = true,
-    path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/gruvbox-baby",
-    url = "https://github.com/luisiacc/gruvbox-baby"
-  },
   ["indent-blankline.nvim"] = {
     loaded = true,
     path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
@@ -245,6 +240,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/vim-gotham",
     url = "https://github.com/whatyouhide/vim-gotham"
+  },
+  ["vim-illuminate"] = {
+    loaded = true,
+    path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/vim-illuminate",
+    url = "https://github.com/RRethy/vim-illuminate"
   },
   ["zen-mode.nvim"] = {
     loaded = true,
