@@ -1,3 +1,5 @@
+local actions = require('telescope.actions')
+
 require("telescope").setup { 
     pickers = {
         live_grep = {
@@ -6,6 +8,14 @@ require("telescope").setup {
             end
         },
     },
+    defaults = {
+        mappings = {
+            i = {
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
+            },
+        }
+    }
 }
 
 local builtin = require('telescope.builtin')
