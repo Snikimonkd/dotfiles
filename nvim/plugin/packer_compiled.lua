@@ -196,6 +196,11 @@ _G.packer_plugins = {
     path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
   },
+  ["nvim-dap-go"] = {
+    loaded = true,
+    path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/nvim-dap-go",
+    url = "https://github.com/leoluz/nvim-dap-go"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/slukash/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -269,22 +274,22 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: git-conflict.nvim
-time([[Config for git-conflict.nvim]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17git-conflict\frequire\0", "config", "git-conflict.nvim")
-time([[Config for git-conflict.nvim]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
 try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
 time([[Config for nvim-autopairs]], false)
--- Config for: neotest
-time([[Config for neotest]], true)
-try_loadstring("\27LJ\2\nÏ\1\0\0\t\0\f\1\0226\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\0026\1\4\0'\3\3\0B\1\2\0029\1\5\0015\3\n\0004\4\3\0006\5\4\0'\a\6\0B\5\2\0025\a\b\0005\b\a\0=\b\t\aB\5\2\0?\5\0\0=\4\v\3B\1\2\1K\0\1\0\radapters\1\0\0\17experimental\1\0\0\1\0\1\15test_table\2\15neotest-go\nsetup\frequire\fneotest\26nvim_create_namespace\bapi\bvim\3€€À™\4\0", "config", "neotest")
-time([[Config for neotest]], false)
+-- Config for: git-conflict.nvim
+time([[Config for git-conflict.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17git-conflict\frequire\0", "config", "git-conflict.nvim")
+time([[Config for git-conflict.nvim]], false)
 -- Config for: codewindow.nvim
 time([[Config for codewindow.nvim]], true)
 try_loadstring("\27LJ\2\nW\0\0\3\0\4\0\b6\0\0\0'\2\1\0B\0\2\0029\1\2\0B\1\1\0019\1\3\0B\1\1\1K\0\1\0\27apply_default_keybinds\nsetup\15codewindow\frequire\0", "config", "codewindow.nvim")
 time([[Config for codewindow.nvim]], false)
+-- Config for: neotest
+time([[Config for neotest]], true)
+try_loadstring("\27LJ\2\nÏ\1\0\0\t\0\f\1\0226\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\0026\1\4\0'\3\3\0B\1\2\0029\1\5\0015\3\n\0004\4\3\0006\5\4\0'\a\6\0B\5\2\0025\a\b\0005\b\a\0=\b\t\aB\5\2\0?\5\0\0=\4\v\3B\1\2\1K\0\1\0\radapters\1\0\0\17experimental\1\0\0\1\0\1\15test_table\2\15neotest-go\nsetup\frequire\fneotest\26nvim_create_namespace\bapi\bvim\3€€À™\4\0", "config", "neotest")
+time([[Config for neotest]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads

@@ -138,6 +138,7 @@ return require('packer').startup(function(use)
 
     -- дебаг
     use {'mfussenegger/nvim-dap'}
+    use {'leoluz/nvim-dap-go'}
 
     -- мердж конфликты
     use {'akinsho/git-conflict.nvim', tag = "*", config = function()
