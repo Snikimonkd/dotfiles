@@ -90,6 +90,11 @@ return require('packer').startup(function(use)
         end
     }
 
+    use {'sainnhe/gruvbox-material'}
+
+    -- считает сколько времени на что тратишь
+    use {'wakatime/vim-wakatime'}
+
     -- для тестов
     use {'fatih/vim-go'}
     use {'rfratto/vim-go-testify'}
@@ -130,6 +135,9 @@ return require('packer').startup(function(use)
             codewindow.apply_default_keybinds()
         end,
     }
+
+    -- дебаг
+    use {'mfussenegger/nvim-dap'}
 
     -- мердж конфликты
     use {'akinsho/git-conflict.nvim', tag = "*", config = function()

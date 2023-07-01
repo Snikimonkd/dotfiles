@@ -5,5 +5,5 @@ local current_signature = function()
 end
 
 require('lualine').setup{
-    options = { theme = 'gruvbox' }
+    options = { theme = 'gruvbox-material' }
 }

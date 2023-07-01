@@ -28,10 +28,7 @@ keymap.set('n', '<leader>/', ':nohl<CR>')
 
 local opts = { noremap = true, silent = true }
 -- запустить ближайший тест
-keymap.set('n', '<leader>gt', ":GoTestFunc<CR>")
-
--- показать вывод тестов
-keymap.set('n', '<leader>r', function() require('neotest').output_panel.open() end, opts)
+keymap.set('n', '<leader>gt', ":GoTestifyFunc<CR>")
 
 -- сгенерить uuid
 keymap.set('n', "<leader>u", ":r! uuidgen | tr '[:upper:]' '[:lower:]'<CR>")
@@ -41,3 +38,22 @@ keymap.set('n', '<leader>lc', ":GitConflictListQf<CR>")
 
 -- переход в NORMAL на ESC в терминале
 keymap.set('t', '<Esc>', '<C-\\><C-n>')
+
+-- открыть терминал
+keymap.set('n', '<C-t>', ':terminal<CR>')
+
+-- сплит экрана
+keymap.set('n', '<leader>h', ':<C-u>split<CR>')
+keymap.set('n', '<leader>g', ':<C-u>vsplit<CR>')
+
+vim.cmd('cnoreabbrev W! w!')
+vim.cmd('cnoreabbrev Q! q!')
+vim.cmd('cnoreabbrev Qall! qall!')
+vim.cmd('cnoreabbrev Wq wq')
+vim.cmd('cnoreabbrev Wa wa')
+vim.cmd('cnoreabbrev wQ wq')
+vim.cmd('cnoreabbrev WQ wq')
+vim.cmd('cnoreabbrev W w')
+vim.cmd('cnoreabbrev Q q')
+vim.cmd('cnoreabbrev Qall qall')
+

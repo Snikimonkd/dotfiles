@@ -15,17 +15,31 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- настройки для цветовой темы
 vim.opt.termguicolors = true
-require("gruvbox").setup({
-    inverse = true, -- invert background for search, diffs, statuslines and errors
-    contrast = "soft", -- can be "hard", "soft" or empty string
-    palette_overrides = {},
-})
+-- require("gruvbox").setup({
+--     inverse = true, -- invert background for search, diffs, statuslines and errors
+--     contrast = "soft", -- can be "hard", "soft" or empty string
+--     palette_overrides = {},
+-- })
 
--- цветовая тема
-vim.cmd.colorscheme 'gruvbox'
+-- прозрачный задний фон
+vim.g.gruvbox_material_transparent_background = 1
+-- выделяет все слова как то на котором курсор
+vim.g.gruvbox_material_current_word = 'grey background'
+-- выделять красным строку на которой ошибка
+vim.g.gruvbox_material_diagnostic_text_highlight = 1
+-- выделять красным текст ошибки сбоку
+vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
+-- мягкость заднего фона
+vim.g.gruvbox_material_background = 'soft'
+-- For better performance
+vim.g.gruvbox_material_better_performance = 1
+
+
+vim.cmd.colorscheme 'gruvbox-material'
+-- vim.cmd.colorscheme 'gruvbox'
 -- vim.cmd.colorscheme 'melange'
 -- vim.cmd.colorscheme 'alduin'
---vim.cmd.colorscheme 'anderson'
+-- vim.cmd.colorscheme 'anderson'
 -- vim.cmd.colorscheme 'carbonized-dark'
 -- vim.cmd.colorscheme 'focus'
 -- vim.cmd.colorscheme 'gotham'
@@ -72,4 +86,3 @@ vim.g.go_highlight_extra_types = 1
 -- видимость картинки на заднем плане
 vim.api.nvim_set_hl(0, "Normal", {bg = "none"})
 vim.api.nvim_set_hl(0, "NormalFloat", {bg = "none"})
-
