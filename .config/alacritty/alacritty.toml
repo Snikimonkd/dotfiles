@@ -18,7 +18,11 @@ padding = {x = 10, y = 10}
 
 [font]
 
-normal = { family = "FiraCode Nerd Font Mono", style = "SemiBold" }
+normal = { family = "Iosevka Nerd Font", style = "SemiBold Extended" }
+bold = { family = "Iosevka Nerd Font", style = "SemiBold Extended" }
+italic = { family = "Iosevka Nerd Font", style = "SemiBold Extended" }
+bold_italic = { family = "Iosevka Nerd Font", style = "SemiBold Extended" }
+
 size = 24
 
 [selection]
