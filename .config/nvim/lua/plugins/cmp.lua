@@ -20,18 +20,6 @@ return {
 		"hrsh7th/nvim-cmp",
 		version = false,
 		dependencies = {
-			{
-				"MattiasMTS/cmp-dbee",
-				dependencies = {
-					{
-						dir = "~/go/src/gh/nvim-dbee",
-						-- "kndndrj/nvim-dbee",
-					},
-				},
-				ft = "sql", -- optional but good to have
-				opts = {}, -- needed
-			},
-
 			-- sourcescmp
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
@@ -47,8 +35,6 @@ return {
 
 			dir = "~/go/src/gh/cmp-go-pkgs",
 			-- "Snikimonkd/cmp-go-pkgs",
-
-			"kristijanhusak/vim-dadbod-completion",
 
 			-- autopairs
 			"windwp/nvim-autopairs",
@@ -117,9 +103,7 @@ return {
 					{ name = "luasnip" },
 					{ name = "nvim_lua" },
 					{ name = "buffer" },
-					{ name = "vim-dadbod-completion" },
 					{ name = "go_pkgs" },
-					{ name = "cmp-dbee" },
 				},
 				{ name = "path" },
 				formatting = {
@@ -131,8 +115,6 @@ return {
 							luasnip = "[snip]",
 							nvim_lua = "[api]",
 							go_pkgs = "[pkgs]",
-							["cmp-dbee"] = "[db]",
-							["vim-dadbod-completion"] = "[db]",
 						},
 					}),
 				},
