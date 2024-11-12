@@ -80,11 +80,11 @@ func {{.TestName}}(t *testing.T) {
 					{{Got .}} := {{Param .}}.String()
                     if {{Got .}} != tt.{{Want .}} {
 				{{- else if .IsBasicType}}
-					{{if $f.OnlyReturnsOneValue}}{{Got .}} := {{template "inline" $f}}
-                    if {{end}} {{Got .}} != tt.{{Want .}} {
+					{{if $f.OnlyReturnsOneValue}}{{Got .}} := {{template "inline" $f}}{{end}}
+                    if {{Got .}} != tt.{{Want .}} {
 				{{- else}}
-					{{if $f.OnlyReturnsOneValue}}{{Got .}} := {{template "inline" $f}}
-                    if {{end}} !cmp.Equal({{Got .}}, tt.{{Want .}}) {
+					{{if $f.OnlyReturnsOneValue}}{{Got .}} := {{template "inline" $f}}{{end}}
+                    if !cmp.Equal({{Got .}}, tt.{{Want .}}) {
 				{{- end}}
 				t.Errorf("{{template "message" $f}} {{if $f.ReturnsMultiple}}{{Got .}} {{end}}= %v, want %v", {{template "inputs" $f}} {{Got .}}, tt.{{Want .}})
 				}

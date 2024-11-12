@@ -123,10 +123,22 @@ return {
 				},
 			})
 
+			--			lspconfig["buf_ls"].setup({
+			--				capabilities = lsp_capabilities,
+			--				on_attach = lsp_attach,
+			--				filetypes = { "proto" },
+			--			})
+
 			lspconfig["graphql"].setup({
 				capabilities = lsp_capabilities,
 				on_attach = lsp_attach,
 				filetypes = { "graphql", "gql", "grpah" },
+			})
+
+			lspconfig["ols"].setup({
+				capabilities = lsp_capabilities,
+				on_attach = lsp_attach,
+				filetypes = { "odin" },
 			})
 
 			lspconfig["zls"].setup({
@@ -134,6 +146,11 @@ return {
 				on_attach = lsp_attach,
 				filetypes = { "zig" },
 			})
+
+			--			lspconfig["clangd"].setup({
+			--				capabilities = lsp_capabilities,
+			--				on_attach = lsp_attach,
+			--			})
 
 			lspconfig["lua_ls"].setup({
 				on_attach = lsp_attach,

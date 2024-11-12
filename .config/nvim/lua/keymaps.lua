@@ -12,6 +12,9 @@ k.set("n", "<S-Tab>", ":bprev<CR>")
 -- next buffer
 k.set("n", "<Tab>", ":bnext<CR>")
 
+-- redo
+k.set("n", "<S-u>", "<C-r>")
+
 -- Clear search highlighting with esc
 k.set("n", "<Esc>", ":noh <CR>")
 
