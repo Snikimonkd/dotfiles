@@ -4,7 +4,15 @@ return {
 	-- debug
 	{
 		"leoluz/nvim-dap-go",
-		opts = {},
+		config = function()
+			require("dap-go").setup({
+				delve = {
+					args = {
+						["max-string-len"] = 1000,
+					},
+				},
+			})
+		end,
 	},
 	{
 		"mfussenegger/nvim-dap",
@@ -12,22 +20,15 @@ return {
 			"leoluz/nvim-dap-go",
 		},
 		config = function()
+			-- vim.print(vim.inspect(require("dap-go").get_arguments()))
 			require("dap").set_log_level("debug")
 
 			vim.keymap.set("n", "<leader>bp", ":DapToggleBreakpoint<CR>")
 
-			vim.keymap.set("n", "<leader>dw", function()
-				local widgets = require("dap.ui.widgets")
-				local sidebar = widgets.sidebar(widgets.scopes, nil, "bot split")
-				sidebar.open()
-			end)
-
-			vim.keymap.set("n", "<leader>dt", require("dap-go").debug_test)
-			vim.keymap.set("n", "<leader>dk", ":lua require('dap.ui.variables').hover()<CR>")
-			vim.keymap.set("n", "<leader>sc", require("dap").continue)
-			vim.keymap.set("n", "<leader>so", require("dap").step_over)
-			vim.keymap.set("n", "<leader>si", require("dap").step_into)
-			vim.keymap.set("n", "<leader>ds", require("dap").terminate)
+			vim.keymap.set("n", "dk", ":lua require('dap.ui.variables').hover()<CR>")
+			vim.keymap.set("n", "sc", require("dap").continue)
+			vim.keymap.set("n", "so", require("dap").step_over)
+			vim.keymap.set("n", "si", require("dap").step_into)
 		end,
 	},
 	{
@@ -60,16 +61,20 @@ return {
 							{
 								id = "repl",
 								size = 0.5,
-								position = "right",
-							},
-							{
-								id = "scopes",
-								size = 0.5,
-								position = "left",
 							},
 						},
 						position = "bottom",
-						size = 15,
+						size = 4,
+					},
+					{
+						elements = {
+							{
+								id = "scopes",
+								size = 0.5,
+							},
+						},
+						position = "bottom",
+						size = 8,
 					},
 				},
 				render = {
@@ -78,8 +83,17 @@ return {
 					max_type_length = 10000,
 				},
 			})
-			vim.keymap.set("n", "<leader>do", require("dapui").open)
-			vim.keymap.set("n", "<leader>dc", require("dapui").close)
+
+			vim.keymap.set("n", "<leader>dt", function()
+				require("dap-go").debug_test()
+				require("dapui").open()
+			end)
+
+			vim.keymap.set("n", "do", require("dapui").toggle)
+			vim.keymap.set("n", "ds", function()
+				require("dapui").close()
+				require("dap").terminate()
+			end)
 		end,
 	},
 }

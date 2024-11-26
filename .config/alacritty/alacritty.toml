@@ -17,7 +17,7 @@ decorations = "None"
 padding = {x = 10, y = 10}
 
 [font]
-
+# normal = { family = "Departure Mono", style = "Regular" }
 normal = { family = "Iosevka Nerd Font", style = "SemiBold Extended" }
 bold = { family = "Iosevka Nerd Font", style = "SemiBold Extended" }
 italic = { family = "Iosevka Nerd Font", style = "SemiBold Extended" }
@@ -31,8 +31,14 @@ save_to_clipboard = true
 
 [keyboard]
 bindings = [
-    {key = "H", mods = "Control|Shift", command = {program = "/opt/homebrew/bin/tmux", args = ["prev"]}},
-    {key = "L", mods = "Control|Shift", command = {program = "/opt/homebrew/bin/tmux", args = ["next"]}},
+#    {key = "H", mods = "Control|Shift", command = {program = "/opt/homebrew/bin/tmux", args = ["prev"]}},
+#    {key = "L", mods = "Control|Shift", command = {program = "/opt/homebrew/bin/tmux", args = ["next"]}},
+
+    {key = "H", mods = "Control|Shift", chars = "\u001b[72;6u"},
+    {key = "L", mods = "Control|Shift", chars = "\u001b[76;6u"},
+
+    {key = "<", mods = "Control|Shift", chars = "\u001b[60;6u"},
+    {key = ">", mods = "Control|Shift", chars = "\u001b[62;6u"},
 
     {key = "Enter", mods = "Control|Shift", chars = "\u001b[13;6u"},
     {key = "}", mods = "Control|Shift", chars = "\u001b[125;6u"},

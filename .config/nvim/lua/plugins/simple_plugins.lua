@@ -16,18 +16,6 @@ return {
 		},
 	},
 	{
-		-- for git conflicts
-		"akinsho/git-conflict.nvim",
-		opts = {
-			disable_diagnostics = true,
-			list_opener = "copen",
-			highlights = {
-				incoming = "green",
-				current = "blue",
-			},
-		},
-	},
-	{
 		-- autopairs
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -55,7 +43,18 @@ return {
 			exclude = {
 				filetypes = { "dashboard" },
 			},
+			scope = {
+				enabled = false,
+			},
 		},
+	},
+	{
+		"ggandor/leap.nvim",
+		config = function()
+			require("leap").opts.safe_labels = {}
+			require("leap").opts.case_sensitive = false
+			vim.keymap.set("n", "s", "<Plug>(leap)")
+		end,
 	},
 	{
 		-- highlight same words

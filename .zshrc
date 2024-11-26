@@ -14,6 +14,7 @@ export PATH="$PATH:/usr/local/bin"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 export PATH=$PATH:$HOME/zig
 export PATH=$PATH:$HOME/zls/zig-out/bin
+export PATH=$PATH:$HOME/ols
 
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
@@ -157,3 +158,7 @@ COLOR_CARET=$'%F{175}'
 COLOR_GIT=$'%F{108}'
 setopt PROMPT_SUBST
 export PROMPT='${COLOR_DIR}%~ ${COLOR_GIT}$(parse_git_branch)${COLOR_CARET}❯${COLOR_DEF} '
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

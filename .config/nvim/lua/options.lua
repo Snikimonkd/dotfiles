@@ -11,7 +11,7 @@ vim.g["test#neovim#start_normal"] = 1
 vim.cmd("language en_US.utf-8")
 
 -- relative line number
-vim.wo.rnu = true
+-- vim.wo.nonumber = true
 
 -- absolut current line number
 vim.wo.nu = true
