@@ -117,8 +117,6 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-echo -ne '\e[1 q'
-
 alias gs="git status"
 alias gp="git push"
 alias gc="git commit"
@@ -162,3 +160,6 @@ export PROMPT='${COLOR_DIR}%~ ${COLOR_GIT}$(parse_git_branch)${COLOR_CARET}❯${
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# makes cursor block
+echo -ne '\e[1 q'
