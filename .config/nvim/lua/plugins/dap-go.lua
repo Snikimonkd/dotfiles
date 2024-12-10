@@ -25,10 +25,10 @@ return {
 
 			vim.keymap.set("n", "<leader>bp", ":DapToggleBreakpoint<CR>")
 
-			vim.keymap.set("n", "dk", ":lua require('dap.ui.variables').hover()<CR>")
-			vim.keymap.set("n", "sc", require("dap").continue)
-			vim.keymap.set("n", "so", require("dap").step_over)
-			vim.keymap.set("n", "si", require("dap").step_into)
+			vim.keymap.set("n", "<leader>dk", ":lua require('dap.ui.variables').hover()<CR>")
+			vim.keymap.set("n", "<leader>sc", require("dap").continue)
+			vim.keymap.set("n", "<leader>so", require("dap").step_over)
+			vim.keymap.set("n", "<leader>si", require("dap").step_into)
 		end,
 	},
 	{
@@ -89,8 +89,8 @@ return {
 				require("dapui").open()
 			end)
 
-			vim.keymap.set("n", "do", require("dapui").toggle)
-			vim.keymap.set("n", "ds", function()
+			vim.keymap.set("n", "<leader>do", require("dapui").toggle)
+			vim.keymap.set("n", "<leader>ds", function()
 				require("dapui").close()
 				require("dap").terminate()
 			end)

@@ -51,7 +51,7 @@ return {
 	{
 		"ggandor/leap.nvim",
 		config = function()
-			require("leap").opts.safe_labels = {}
+			require("leap").opts.safe_labels = { "s" }
 			require("leap").opts.case_sensitive = false
 			vim.keymap.set("n", "s", "<Plug>(leap)")
 		end,

@@ -77,6 +77,10 @@ k.set("n", "<leader>gs", builtin.git_status, {})
 -- git blame
 k.set("n", "<leader>gb", ":GitBlameToggle<CR>")
 
+k.set("n", "<leader><leader>ll", "<cmd>source %<CR>")
+k.set("n", "<leader>ll", ".lua<CR>")
+k.set("v", "<leader>ll", ":lua<CR>")
+
 -- lsp references
 k.set("n", "gr", builtin.lsp_references, {})
 -- lsp implementations

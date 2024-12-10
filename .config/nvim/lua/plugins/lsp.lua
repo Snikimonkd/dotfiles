@@ -2,9 +2,11 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependecies = {
+			"nvim-lua/plenary.nvim",
 			"Chaitanyabsprip/fastaction.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"ray-x/lsp_signature.nvim",
+			"saghen/blink.cmp",
 		},
 		config = function()
 			local keymap = vim.keymap
@@ -21,7 +23,8 @@ return {
 			keymap.set("n", "]d", vim.diagnostic.goto_next)
 			keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
-			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+			--			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			local lsp_attach = function(client, bufnr)
 				if client.server_capabilities.inlayHintProvider then
@@ -123,11 +126,11 @@ return {
 				},
 			})
 
-			--			lspconfig["buf_ls"].setup({
-			--				capabilities = lsp_capabilities,
-			--				on_attach = lsp_attach,
-			--				filetypes = { "proto" },
-			--			})
+			lspconfig["buf_ls"].setup({
+				capabilities = lsp_capabilities,
+				on_attach = lsp_attach,
+				filetypes = { "proto" },
+			})
 
 			lspconfig["graphql"].setup({
 				capabilities = lsp_capabilities,
@@ -135,10 +138,29 @@ return {
 				filetypes = { "graphql", "gql", "grpah" },
 			})
 
+			function get_root_dir_name()
+				local last = ""
+				for tmp in string.gmatch(vim.fn.getcwd(), "([^" .. "/" .. "]+)") do
+					if tmp == "" then
+						::continue::
+					end
+					last = tmp
+				end
+				return last
+			end
+
 			lspconfig["ols"].setup({
 				capabilities = lsp_capabilities,
 				on_attach = lsp_attach,
 				filetypes = { "odin" },
+				init_options = {
+					collections = {
+						{
+							name = get_root_dir_name(),
+							path = vim.fn.getcwd(),
+						},
+					},
+				},
 			})
 
 			lspconfig["zls"].setup({
