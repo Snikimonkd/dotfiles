@@ -1,5 +1,9 @@
 return {
 	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "make",
+	},
+	{
 		-- search
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
@@ -10,6 +14,14 @@ return {
 			local ignore = { ".git/", "vendor", "bin", "go.sum", ".*pb.*go", ".*swagger.json", ".*mock.*go" }
 			local actions = require("telescope.actions")
 			require("telescope").setup({
+				extensions = {
+					fzf = {
+						fuzzy = true,
+						override_generic_sorter = true,
+						override_file_sorter = true,
+						case_mode = "smart_case",
+					},
+				},
 				pickers = {
 					live_grep = {
 						-- previewer = require("telescope.config").values.grep_previewer.new(),

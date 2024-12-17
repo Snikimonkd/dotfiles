@@ -53,7 +53,7 @@ export ZSH_CUSTOM="$ZSH/custom"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -89,8 +89,6 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-typeset -A ZSH_HIGHLIGHT_STYLES
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -99,11 +97,11 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -129,18 +127,7 @@ alias e=exit
 alias mr=make run
 alias mb=make build
 
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
 eval $(thefuck --alias)
-
-function parse_git_branch() {
-    GIT_BRANCH=$(git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p')
-    if [ "$GIT_BRANCH" != "" ]
-    then
-        echo  "${GIT_BRANCH} "
-    fi;
-}
-
 
 # local grey='239'
 # local red='167'
@@ -150,6 +137,14 @@ function parse_git_branch() {
 # local cyan='108'
 # local white='223'
 
+function parse_git_branch() {
+    GIT_BRANCH=$(git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p')
+    if [ "$GIT_BRANCH" != "" ]
+    then
+        echo  "${GIT_BRANCH} "
+    fi;
+}
+
 COLOR_DEF=$'%f'
 COLOR_DIR=$'%F{239}'
 COLOR_CARET=$'%F{175}'
@@ -157,9 +152,13 @@ COLOR_GIT=$'%F{108}'
 setopt PROMPT_SUBST
 export PROMPT='${COLOR_DIR}%~ ${COLOR_GIT}$(parse_git_branch)${COLOR_CARET}❯${COLOR_DEF} '
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# disable underline
+(( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[path]=none
+ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
-# makes cursor block
-echo -ne '\e[1 q'
+# set tab title to the current dir and
+precmd() {
+    CUR_DIR=$(pwd | awk -F "/" '{print $NF}')
+    echo -en "\e]2;${CUR_DIR}\a"
+}

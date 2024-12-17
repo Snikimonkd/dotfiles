@@ -10,11 +10,12 @@ vim.g["test#neovim#start_normal"] = 1
 -- eng as default
 vim.cmd("language en_US.utf-8")
 
--- relative line number
--- vim.wo.nonumber = true
+-- show relative line nubmers
+vim.wo.rnu = true
 
--- absolut current line number
+-- show absolut number for current line
 vim.wo.nu = true
+
 -- disable eof symbols
 vim.api.nvim_command("set fillchars=eob:\\ ")
 
