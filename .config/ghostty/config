@@ -1,3 +1,5 @@
+term = xterm-256color
+
 font-family = "Iosevka Semibold"
 font-family-bold = "Iosevka Semibold"
 font-family-italic = "Iosevka Semibold"
@@ -20,7 +22,7 @@ cursor-style = block
 cursor-style-blink = false
 
 mouse-hide-while-typing = true
-background-opacity = 0.9
+background-opacity = 0.8
 background-blur-radius = 20
 macos-titlebar-style = tabs
 

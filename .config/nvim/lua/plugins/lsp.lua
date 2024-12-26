@@ -23,8 +23,8 @@ return {
 			keymap.set("n", "]d", vim.diagnostic.goto_next)
 			keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
-			--			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
+			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+			--- local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			local lsp_attach = function(client, bufnr)
 				if client.server_capabilities.inlayHintProvider then
@@ -63,6 +63,12 @@ return {
 			})
 			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 				border = "rounded",
+			})
+
+			lspconfig["c3_lsp"].setup({
+				capabilities = lsp_capabilities,
+				on_attach = lsp_attach,
+				filetypes = { "c3", "c3i", "c3t", "c3l" },
 			})
 
 			--			lspconfig["golangci_lint_ls"].setup({
@@ -169,10 +175,10 @@ return {
 				filetypes = { "zig" },
 			})
 
-			--			lspconfig["clangd"].setup({
-			--				capabilities = lsp_capabilities,
-			--				on_attach = lsp_attach,
-			--			})
+			lspconfig["clangd"].setup({
+				capabilities = lsp_capabilities,
+				on_attach = lsp_attach,
+			})
 
 			lspconfig["lua_ls"].setup({
 				on_attach = lsp_attach,
