@@ -15,6 +15,8 @@ export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 export PATH=$PATH:$HOME/zig
 export PATH=$PATH:$HOME/zls/zig-out/bin
 export PATH=$PATH:$HOME/ols
+export PATH=$PATH:$HOME/c3c
+export PATH=$PATH:$HOME/c3lsp
 
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
