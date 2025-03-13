@@ -1,8 +1,8 @@
 return {
-	{
-		"neovim/nvim-lspconfig",
-		dependecies = {
-			"nvim-lua/plenary.nvim",
+    {
+        "neovim/nvim-lspconfig",
+        dependecies = {
+            "nvim-lua/plenary.nvim",
 			"Chaitanyabsprip/fastaction.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"ray-x/lsp_signature.nvim",
@@ -100,7 +100,8 @@ return {
 							unusedvariable = true,
 							unusedparams = true,
 							useany = true,
-							unusedwrite = true,
+                            unusedwrite = true,
+                            modernize = true,
 						},
 						codelenses = {
 							generate = true,
@@ -126,7 +127,6 @@ return {
 						matcher = "Fuzzy",
 						symbolMatcher = "FastFuzzy",
 						semanticTokens = false,
-						noSemanticString = false, -- disable semantic string tokens so we can use treesitter highlight injection
 						-- vulncheck = "Imports",
 					},
 				},
@@ -141,66 +141,67 @@ return {
 			lspconfig["graphql"].setup({
 				capabilities = lsp_capabilities,
 				on_attach = lsp_attach,
-				filetypes = { "graphql", "gql", "grpah" },
-			})
+                filetypes = { "graphql", "gql", "grpah" },
+            })
 
-			function get_root_dir_name()
-				local last = ""
-				for tmp in string.gmatch(vim.fn.getcwd(), "([^" .. "/" .. "]+)") do
-					if tmp == "" then
-						::continue::
-					end
-					last = tmp
-				end
-				return last
-			end
+            local function get_root_dir_name()
+                local last = ""
+                for tmp in string.gmatch(vim.fn.getcwd(), "([^" .. "/" .. "]+)") do
+                    if tmp == "" then
+                        goto continue
+                    end
+                    last = tmp
+                    ::continue::
+                end
+                return last
+            end
 
-			lspconfig["ols"].setup({
-				capabilities = lsp_capabilities,
-				on_attach = lsp_attach,
-				filetypes = { "odin" },
-				init_options = {
-					collections = {
-						{
-							name = get_root_dir_name(),
-							path = vim.fn.getcwd(),
-						},
-					},
-				},
-			})
+            lspconfig["ols"].setup({
+                capabilities = lsp_capabilities,
+                on_attach = lsp_attach,
+                filetypes = { "odin" },
+                init_options = {
+                    collections = {
+                        {
+                            name = get_root_dir_name(),
+                            path = vim.fn.getcwd(),
+                        },
+                    },
+                },
+            })
 
-			lspconfig["zls"].setup({
-				capabilities = lsp_capabilities,
-				on_attach = lsp_attach,
-				filetypes = { "zig" },
-			})
+            lspconfig["zls"].setup({
+                capabilities = lsp_capabilities,
+                on_attach = lsp_attach,
+                filetypes = { "zig" },
+            })
 
-			lspconfig["clangd"].setup({
-				capabilities = lsp_capabilities,
-				on_attach = lsp_attach,
-			})
+            lspconfig["clangd"].setup({
+                capabilities = lsp_capabilities,
+                on_attach = lsp_attach,
+            })
 
-			lspconfig["lua_ls"].setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
+            lspconfig["lua_ls"].setup({
+                on_attach = lsp_attach,
+                capabilities = lsp_capabilities,
 
-				-- and lua settings work only from here
-				settings = {
-					Lua = {
-						-- make the language server recognize "vim" global
-						diagnostics = {
-							globals = { "vim" },
-						},
-						workspace = {
-							-- make language server aware of runtime files
-							library = {
-								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-								[vim.fn.stdpath("config") .. "/lua"] = true,
-							},
-						},
-					},
-				},
-			})
-		end,
-	},
+                -- and lua settings work only from here
+                settings = {
+                    Lua = {
+                        -- make the language server recognize "vim" global
+                        diagnostics = {
+                            globals = { "vim" },
+                        },
+                        workspace = {
+                            -- make language server aware of runtime files
+                            library = {
+                                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                [vim.fn.stdpath("config") .. "/lua"] = true,
+                            },
+                        },
+                    },
+                },
+            })
+        end,
+    },
 }

@@ -1,7 +1,41 @@
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "red" })
 vim.fn.sign_define("DapStopped", { text = "→", texthl = "red" })
+
 return {
 	-- debug
+	{
+		"julianolf/nvim-dap-lldb",
+		dependencies = {
+			"mfussenegger/nvim-dap",
+		},
+		config = function()
+			local cfg = {
+				configurations = {
+					c3 = {
+						{
+							name = "Launch debugger",
+							type = "lldb",
+							request = "launch",
+							cwd = "${workspaceFolder}",
+							program = function()
+								-- Build with debug symbols
+								local out = vim.fn.system({ "make", "debug" })
+								-- Check for errors
+								if vim.v.shell_error ~= 0 then
+									vim.notify(out, vim.log.levels.ERROR)
+									return nil
+								end
+								-- Return path to the debuggable program
+								return "build/bestty"
+							end,
+						},
+					},
+				},
+			}
+
+			require("dap-lldb").setup(cfg)
+		end,
+	},
 	{
 		"leoluz/nvim-dap-go",
 		config = function()
@@ -32,11 +66,11 @@ return {
 		end,
 	},
 	{
+		"rcarriga/nvim-dap-ui",
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"mfussenegger/nvim-dap",
 		},
-		"rcarriga/nvim-dap-ui",
 		config = function()
 			require("dapui").setup({
 				controls = {

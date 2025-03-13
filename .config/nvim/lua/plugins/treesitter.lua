@@ -10,7 +10,6 @@ return {
 				c3 = "c3",
 				c3i = "c3",
 				c3t = "c3",
-				c3l = "c3",
 			},
 		})
 		local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
@@ -46,6 +45,7 @@ return {
 				"vimdoc",
 				"graphql",
 				"odin",
+				"c3",
 			},
 			-- Install parsers synchronously (only applied to `ensure_installed`)
 			sync_install = false,

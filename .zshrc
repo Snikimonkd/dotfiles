@@ -15,8 +15,8 @@ export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 export PATH=$PATH:$HOME/zig
 export PATH=$PATH:$HOME/zls/zig-out/bin
 export PATH=$PATH:$HOME/ols
-export PATH=$PATH:$HOME/c3c
-export PATH=$PATH:$HOME/c3lsp
+export PATH=$PATH:$HOME/c3c/build
+export PATH=$PATH:$HOME/c3-lsp/server/bin
 
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
@@ -130,14 +130,6 @@ alias mr=make run
 alias mb=make build
 
 eval $(thefuck --alias)
-
-# local grey='239'
-# local red='167'
-# local yellow='214'
-# local blue='109'
-# local magenta='175'
-# local cyan='108'
-# local white='223'
 
 function parse_git_branch() {
     GIT_BRANCH=$(git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p')

@@ -19,6 +19,9 @@ vim.wo.nu = true
 -- disable eof symbols
 vim.api.nvim_command("set fillchars=eob:\\ ")
 
+-- vim.api.nvim_command("set list listchars=tab:| ")
+-- vim.opt.list = true
+-- vim.opt.listchars = "tab:│ "
 -- highlight current line
 vim.wo.cursorline = true
 

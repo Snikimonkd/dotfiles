@@ -11,7 +11,7 @@ return {
 			"Snikimonkd/telescope-git-conflicts.nvim",
 		},
 		config = function()
-			local ignore = { ".git/", "vendor", "bin", "go.sum", ".*pb.*go", ".*swagger.json", ".*mock.*go" }
+			local ignore = { ".git/", "vendor", "bin", "go.sum", ".*pb.*go", ".*swagger.json" }
 			local actions = require("telescope.actions")
 			require("telescope").setup({
 				extensions = {

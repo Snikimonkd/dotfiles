@@ -36,7 +36,6 @@ return {
 	--		opts = {},
 	--	},
 	{
-		-- vertical line between breakets
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		opts = {
