@@ -3,10 +3,6 @@ return {
 	"stevearc/oil.nvim",
 	opts = {
 		default_file_explorer = false,
-		columns = {
-			{ "icon" },
-			{ "mtime", highlight = "yellow" },
-		},
 		float = {
 			max_width = 100,
 			max_height = 100,

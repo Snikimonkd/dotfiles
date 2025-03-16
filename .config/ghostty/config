@@ -30,13 +30,7 @@ unfocused-split-opacity = 1
 
 confirm-close-surface = false
 
-theme = Everforest Dark - Hard
-# background = #000000
-# foreground = #d4be98
-# selection-background = #d4be98
-# selection-foreground = #32302f
-# window-theme = dark
-cursor-color = #d4be98
+theme = GruvboxDarkHard
 
 keybind = clear
 # new tab

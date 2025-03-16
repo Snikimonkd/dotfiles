@@ -2,8 +2,7 @@ return {
 	-- status line
 	"nvim-lualine/lualine.nvim",
 	config = function()
-		--		local custom_theme = require("lualine.themes.gruvbox-material")
-		local custom_theme = require("lualine.themes.everforest")
+		local custom_theme = require("lualine.themes.gruvbox-material")
 		custom_theme.normal.c.bg = "None"
 		custom_theme.inactive.c.bg = "None"
 		custom_theme.visual.c.bg = "None"
