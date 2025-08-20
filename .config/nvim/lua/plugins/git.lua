@@ -1,24 +1,14 @@
 return {
 	{
-		"f-person/git-blame.nvim",
-		opts = {
-			enabled = false,
-			message_template = "<committer> • <date> • <summary>",
-			date_format = "%X %x",
-		},
-	},
-	{
 		-- git signs on the left
 		"lewis6991/gitsigns.nvim",
 		opts = {
 			current_line_blame_opts = {
-				virt_text = true,
-				virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
 				delay = 0,
-				ignore_whitespace = false,
 			},
+			-- current_line_blame = true,
 			on_attach = function(bufnr)
-				local gs = package.loaded.gitsigns
+				local gs = require("gitsigns")
 
 				local function map(mode, l, r, opts)
 					opts = opts or {}
@@ -29,48 +19,42 @@ return {
 				-- Navigation
 				map("n", "]c", function()
 					if vim.wo.diff then
-						return "]c"
+						vim.cmd.normal({ "]c", bang = true })
+					else
+						gs.nav_hunk("next")
 					end
-					vim.schedule(function()
-						gs.next_hunk()
-					end)
-					return "<Ignore>"
-				end, { expr = true })
+				end)
 
 				map("n", "[c", function()
 					if vim.wo.diff then
-						return "[c"
+						vim.cmd.normal({ "[c", bang = true })
+					else
+						gs.nav_hunk("prev")
 					end
-					vim.schedule(function()
-						gs.prev_hunk()
-					end)
-					return "<Ignore>"
-				end, { expr = true })
+				end)
 
 				-- Actions
 				map("n", "<leader>sh", gs.stage_hunk)
-				map("n", "<leader>rr", gs.reset_hunk)
+				map("n", "<leader>Sh", gs.stage_buffer)
 				map("v", "<leader>sh", function()
 					gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end)
+
+				map("n", "<leader>rr", gs.reset_hunk)
+				map("n", "<leader>Rr", gs.reset_buffer)
 				map("v", "<leader>rr", function()
 					gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end)
-				map("n", "<leader>Sh", gs.stage_buffer)
-				map("n", "<leader>uh", gs.undo_stage_hunk)
-				map("n", "<leader>Rh", gs.reset_buffer)
-				map("n", "<leader>rh", gs.preview_hunk)
-				map("n", "<leader>bh", function()
-					gs.blame_line({ full = true })
-				end)
-				--			map("n", "<leader>gb", gs.toggle_current_line_blame)
 
-				map("n", "<leader>dh", gs.diffthis)
-				map("n", "<leader>Dh", function()
-					gs.diffthis("~")
-				end)
-				-- Text object
-				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+				map("n", "<leader>rh", gs.preview_hunk)
+				map("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
+
+				--	map("n", "<leader>dh", gs.diffthis)
+				--	map("n", "<leader>Dh", function()
+				--		gs.diffthis("~")
+				--	end)
+				--	-- Text object
+				--	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 			end,
 		},
 	},

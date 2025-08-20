@@ -46,6 +46,7 @@ return {
 				"graphql",
 				"odin",
 				"c3",
+				"python",
 			},
 			-- Install parsers synchronously (only applied to `ensure_installed`)
 			sync_install = false,
@@ -63,6 +64,14 @@ return {
 				-- Using this option may slow down your editor, and you may see some duplicate highlights.
 				-- Instead of true it can also be a list of languages
 				additional_vim_regex_highlighting = false,
+			},
+		})
+
+		vim.treesitter.language.register("sql", "cql")
+
+		vim.filetype.add({
+			extension = {
+				cql = "cql",
 			},
 		})
 	end,

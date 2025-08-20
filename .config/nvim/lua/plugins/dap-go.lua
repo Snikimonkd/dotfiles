@@ -41,6 +41,7 @@ return {
 		config = function()
 			require("dap-go").setup({
 				delve = {
+					build_flags = "-tags=integration,integration_pg,integration_cassandra,integration_keydb,unit,db",
 					args = {
 						["max-string-len"] = 1000,
 					},
@@ -93,22 +94,12 @@ return {
 					{
 						elements = {
 							{
-								id = "repl",
-								size = 0.5,
-							},
-						},
-						position = "bottom",
-						size = 4,
-					},
-					{
-						elements = {
-							{
 								id = "scopes",
 								size = 0.5,
 							},
 						},
 						position = "bottom",
-						size = 8,
+						size = 12,
 					},
 				},
 				render = {
