@@ -81,4 +81,13 @@ return {
 		"Snikimonkd/yazmp",
 		-- dir = "~/go/src/gh/yazmp",
 	},
+	--	{
+	--		"code-biscuits/nvim-biscuits",
+	--		dependencies = {
+	--			"nvim-treesitter/nvim-treesitter",
+	--		},
+	--		opts = {
+	--			cursor_line_only = true,
+	--		},
+	--	},
 }

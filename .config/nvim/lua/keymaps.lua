@@ -90,7 +90,7 @@ k.set("n", "gi", builtin.lsp_implementations, {})
 k.set("n", "<leader>lc", ":Telescope conflicts<CR>", {})
 
 -- go generate current file
-k.set("n", "<leader>gg", ":GoGenerate %<CR>")
+k.set("n", "<leader>gg", ":!go generate %<CR>")
 
 -- add json tags
 k.set("n", "<leader>at", ":GoTagAdd json<CR>")
