@@ -94,8 +94,12 @@ return {
 					{
 						elements = {
 							{
+								id = "repl",
+								size = 0.3,
+							},
+							{
 								id = "scopes",
-								size = 0.5,
+								size = 0.7,
 							},
 						},
 						position = "bottom",

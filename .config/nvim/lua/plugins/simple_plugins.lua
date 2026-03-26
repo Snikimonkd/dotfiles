@@ -30,11 +30,25 @@ return {
 			},
 		},
 	},
-	--	{
-	--		-- http client
-	--		"rest-nvim/rest.nvim",
-	--		opts = {},
-	--	},
+	{
+		"rest-nvim/rest.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			opts = function(_, opts)
+				opts.ensure_installed = opts.ensure_installed or {}
+				table.insert(opts.ensure_installed, "http")
+			end,
+		},
+		config = function()
+			vim.g.rest_nvim = {
+				response = {
+					hooks = {
+						format = true,
+					},
+				},
+			}
+		end,
+	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
@@ -48,7 +62,7 @@ return {
 		},
 	},
 	{
-		"ggandor/leap.nvim",
+		url = "https://codeberg.org/andyg/leap.nvim",
 		config = function()
 			require("leap").opts.safe_labels = { "s" }
 			require("leap").opts.case_sensitive = false
@@ -90,4 +104,10 @@ return {
 	--			cursor_line_only = true,
 	--		},
 	--	},
+	{
+		"mluders/comfy-line-numbers.nvim",
+		opts = {
+			hidden_file_types = { "dashboard", "TelescopePrompt" },
+		},
+	},
 }

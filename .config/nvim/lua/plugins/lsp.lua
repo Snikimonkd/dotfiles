@@ -15,178 +15,207 @@ return {
                         border = "rounded"
                     },
                     underline = false,
-                    virtual_text = false 
+                    virtual_text = true
                 })
 
-                keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-                keymap.set("n", "[d", function() vim.diagnostic.jump({ count = 1, float = true }) end)
-                keymap.set("n", "]d", function() vim.diagnostic.jump({ count = -1, float = true }) end)
-                keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
+            keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+            keymap.set("n", "[d", function() vim.diagnostic.jump({ count = 1, float = true }) end)
+            keymap.set("n", "]d", function() vim.diagnostic.jump({ count = -1, float = true }) end)
+            keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
-                -- local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-                local lsp_capabilities = require('blink.cmp').get_lsp_capabilities()
+            -- local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local lsp_capabilities = require('blink.cmp').get_lsp_capabilities()
 
 
-                vim.api.nvim_create_autocmd("LspAttach", {
-                    callback = function(args)
-                        local bufopts = { noremap = true, silent = true, buffer = args.buf }
-                        vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-                        vim.keymap.set("n", "K", function()
-                            vim.lsp.buf.hover({ border = "rounded" })
-                        end, bufopts)
-                        --				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-                        vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-                        vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-                        vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
-                        vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-                        --				vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-                        vim.keymap.set("n", "<space>of", function()
-                            vim.lsp.buf.format({ async = true })
-                        end, bufopts)
-                    end,
-                })
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                    local bufopts = { noremap = true, silent = true, buffer = args.buf }
+                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+                    vim.keymap.set("n", "K", function()
+                        vim.lsp.buf.hover({ border = "rounded" })
+                    end, bufopts)
+                    --				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+                    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+                    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
+                    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
+                    vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
+                    --				vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+                    vim.keymap.set("n", "<space>of", function()
+                        vim.lsp.buf.format({ async = true })
+                    end, bufopts)
+                end,
+            })
 
-                vim.lsp.config("c3_lsp", {
-                    capabilities = lsp_capabilities,
-                    filetypes = { "c3", "c3i", "c3t", "c3l" },
-                })
-                vim.lsp.enable({"c3_lsp"})
+            vim.lsp.config("c3_lsp", {
+                capabilities = lsp_capabilities,
+                filetypes = { "c3", "c3i", "c3t", "c3l" },
+            })
+            vim.lsp.enable({ "c3_lsp" })
 
-                vim.lsp.config("gopls", {
-                    capabilities = lsp_capabilities,
-                    filetypes = { "go" },
-                    settings = {
-                        gopls = {
-                            buildFlags = { "-tags=integration,integration_pg,integration_cassandra,integration_keydb,unit,db" },
-                            analyses = {
-                                append = true,
-                                asmdecl = true,
-                                assign = true,
-                                atomic = true,
-                                unreachable = true,
-                                nilness = true,
-                                ST1003 = true,
-                                undeclaredname = true,
-                                fillreturns = true,
-                                nonewvars = true,
-                                fieldalignment = false,
-                                shadow = true,
-                                unusedvariable = true,
-                                unusedparams = true,
-                                useany = true,
-                                unusedwrite = true,
-                                modernize = true,
-                            },
-                            codelenses = {
-                                generate = true,
-                                gc_details = true,
-                                test = true,
-                                tidy = true,
-                                vendor = true,
-                                regenerate_cgo = true,
-                                upgrade_dependency = true,
-                            },
-                            hints = {
-                                assignVariableTypes = false,
-                                compositeLiteralFields = false,
-                                compositeLiteralTypes = false,
-                                constantValues = true,
-                                functionTypeParameters = false,
-                                parameterNames = false,
-                                rangeVariableTypes = false,
-                            },
-                            usePlaceholders = false,
-                            completeUnimported = true,
-                            staticcheck = true,
-                            matcher = "Fuzzy",
-                            symbolMatcher = "FastFuzzy",
-                            semanticTokens = false,
-                            -- vulncheck = "Imports",
+            vim.lsp.config("gopls", {
+                capabilities = lsp_capabilities,
+                filetypes = { "go" },
+                settings = {
+                    gopls = {
+                        gofumpt = true,
+                        buildFlags = { "-tags=integration,integration_pg,integration_cassandra,integration_keydb,unit,db" },
+                        analyses = {
+                            append = true,
+                            asmdecl = true,
+                            assign = true,
+                            atomic = true,
+                            unreachable = true,
+                            nilness = true,
+                            ST1003 = true,
+                            undeclaredname = true,
+                            fillreturns = true,
+                            nonewvars = true,
+                            fieldalignment = false,
+                            shadow = true,
+                            unusedvariable = true,
+                            unusedparams = true,
+                            useany = true,
+                            unusedwrite = true,
+                            modernize = true,
                         },
+                        codelenses = {
+                            generate = true,
+                            gc_details = true,
+                            test = true,
+                            tidy = true,
+                            vendor = true,
+                            regenerate_cgo = true,
+                            upgrade_dependency = true,
+                        },
+                        hints = {
+                            assignVariableTypes = false,
+                            compositeLiteralFields = false,
+                            compositeLiteralTypes = false,
+                            constantValues = true,
+                            functionTypeParameters = false,
+                            parameterNames = false,
+                            rangeVariableTypes = false,
+                        },
+                        usePlaceholders = false,
+                        completeUnimported = true,
+                        staticcheck = true,
+                        matcher = "Fuzzy",
+                        symbolMatcher = "FastFuzzy",
+                        semanticTokens = false,
+                        -- vulncheck = "Imports",
                     },
-                })
-                vim.lsp.enable({"gopls"})
+                },
+            })
+            vim.lsp.enable({ "gopls" })
 
-                vim.lsp.config("buf_ls", {
-                    capabilities = lsp_capabilities,
-                    filetypes = { "proto" },
-                })
-                vim.lsp.enable({"buf_ls"})
+---            vim.api.nvim_create_autocmd("BufWritePre", {
+---                pattern = "*.go",
+---                callback = function()
+---                    local gopls = vim.lsp.get_clients({ bufnr = 0, name = 'gopls' })
+---                    if not gopls then
+---                        return
+---                    end
+---                    local params = vim.lsp.util.make_range_params(0, gopls[1].offset_encoding)
+---                    params['context'] = { only = {"source.organizeImports"} }
+---
+---                    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+---                    for cid, res in pairs(result or {}) do
+---                        for _, r in pairs(res.result or {}) do
+---                            if r.edit then
+---                                local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+---                                vim.lsp.util.apply_workspace_edit(r.edit, enc)
+---                            end
+---                        end
+---                    end
+---                    vim.lsp.buf.format({ async = false })
+---                end
+---            })
+
+            vim.lsp.config("buf_ls", {
+                capabilities = lsp_capabilities,
+                filetypes = { "proto" },
+            })
+            vim.lsp.enable({ "buf_ls" })
+
+            vim.lsp.config("buf_ls", {
+                capabilities = lsp_capabilities,
+                filetypes = { "proto" },
+            })
+            vim.lsp.enable({ "buf_ls" })
 
 
-                vim.lsp.config("graphql", {
-                    capabilities = lsp_capabilities,
-                    filetypes = { "graphql", "gql", "grpah" },
-                })
-                vim.lsp.enable({"graphql"})
+            vim.lsp.config("graphql", {
+                capabilities = lsp_capabilities,
+                filetypes = { "graphql", "gql", "grpah" },
+            })
+            vim.lsp.enable({ "graphql" })
 
-                local function get_root_dir_name()
-                    local last = ""
-                    for tmp in string.gmatch(vim.fn.getcwd(), "([^" .. "/" .. "]+)") do
-                        if tmp == "" then
-                            goto continue
-                        end
-                        last = tmp
-                        ::continue::
+            local function get_root_dir_name()
+                local last = ""
+                for tmp in string.gmatch(vim.fn.getcwd(), "([^" .. "/" .. "]+)") do
+                    if tmp == "" then
+                        goto continue
                     end
-                    return last
+                    last = tmp
+                    ::continue::
                 end
+                return last
+            end
 
 
-                vim.lsp.config("ols", {
-                    capabilities = lsp_capabilities,
-                    filetypes = { "odin" },
-                    init_options = {
-                        collections = {
-                            {
-                                name = get_root_dir_name(),
-                                path = vim.fn.getcwd(),
+            vim.lsp.config("ols", {
+                capabilities = lsp_capabilities,
+                filetypes = { "odin" },
+                init_options = {
+                    collections = {
+                        {
+                            name = get_root_dir_name(),
+                            path = vim.fn.getcwd(),
+                        },
+                    },
+                },
+            })
+            vim.lsp.enable({ "ols" })
+
+            vim.lsp.config("zls", {
+                capabilities = lsp_capabilities,
+                filetypes = { "zig" },
+            })
+            vim.lsp.enable({ "zls" })
+
+            vim.lsp.config("clangd", {
+                capabilities = lsp_capabilities,
+            })
+            vim.lsp.enable({ "clangd" })
+
+            vim.lsp.config("pyright", {
+                capabilities = lsp_capabilities,
+            })
+            vim.lsp.enable({ "pyright" })
+
+            vim.lsp.config("lua_ls", {
+                capabilities = lsp_capabilities,
+                -- and lua settings work only from here
+                settings = {
+                    Lua = {
+                        hint = {
+                            enable = false
+                        },
+                        -- make the language server recognize "vim" global
+                        diagnostics = {
+                            globals = { "vim" },
+                        },
+                        workspace = {
+                            -- make language server aware of runtime files
+                            library = {
+                                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                [vim.fn.stdpath("config") .. "/lua"] = true,
                             },
                         },
                     },
-                })
-                vim.lsp.enable({"ols"})
-
-                vim.lsp.config("zls", {
-                    capabilities = lsp_capabilities,
-                    filetypes = { "zig" },
-                })
-                vim.lsp.enable({"zls"})
-
-                vim.lsp.config("clangd", {
-                    capabilities = lsp_capabilities,
-                })
-                vim.lsp.enable({"clangd"})
-
-                vim.lsp.config("pyright", {
-                    capabilities = lsp_capabilities,
-                })
-                vim.lsp.enable({"pyright"})
-
-                vim.lsp.config("lua_ls", {
-                    capabilities = lsp_capabilities,
-                    -- and lua settings work only from here
-                    settings = {
-                        Lua = {
-                            hint = {
-                                enable = false
-                            },
-                            -- make the language server recognize "vim" global
-                            diagnostics = {
-                                globals = { "vim" },
-                            },
-                            workspace = {
-                                -- make language server aware of runtime files
-                                library = {
-                                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                                    [vim.fn.stdpath("config") .. "/lua"] = true,
-                                },
-                            },
-                        },
-                    },
-                })
-                vim.lsp.enable({"lua_ls"})
-
-            end,
-        },
-    }
+                },
+            })
+            vim.lsp.enable({ "lua_ls" })
+        end,
+    },
+}

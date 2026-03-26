@@ -45,8 +45,8 @@ k.set("n", "<leader>uu", function()
 	end
 end)
 
-k.set("n", "<leader>c", "<Plug>RestNvim<cr>")
-k.set("n", "<leader>pp", "<Plug>RestNvimPreview")
+k.set("n", "<leader>c", ":hor below Rest run<cr>")
+k.set("n", "<leader>pp", ":hor below Rest open<cr>")
 
 -- vertical split
 k.set("n", "<leader>v", ":vsplit<CR>")
@@ -90,7 +90,23 @@ k.set("n", "gi", builtin.lsp_implementations, {})
 k.set("n", "<leader>lc", ":Telescope conflicts<CR>", {})
 
 -- go generate current file
-k.set("n", "<leader>gg", ":!go generate %<CR>")
+k.set("n", "<leader>gg", function()
+	local path = vim.fn.expand("%:p")
+	vim.notify("running go generate", vim.log.levels.INFO)
+
+	vim.fn.jobstart({ "go", "generate", path }, {
+		on_exit = function(_, exit_code, _)
+			if exit_code == 0 then
+				vim.notify("✓  go generate completed", vim.log.levels.INFO)
+			end
+		end,
+		on_stderr = function(_, data, _)
+			if data and #data > 0 and data[1] ~= "" then
+				vim.notify_once("Error: " .. table.concat(data, "\n"), vim.log.levels.ERROR)
+			end
+		end,
+	})
+end, {})
 
 -- add json tags
 k.set("n", "<leader>at", ":GoTagAdd json<CR>")
