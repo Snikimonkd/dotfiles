@@ -22,7 +22,7 @@ k.set("n", "<Esc>", ":noh <CR>")
 k.set("n", "<leader>ut", ":GoTestAdd<CR>")
 
 -- run nearest test
-k.set("n", "<leader>gt", ":TestNearest -strategy=neovim<CR>")
+k.set("n", "<leader>gt", ":TestNearest -strategy=neovim -count=1<CR>")
 
 -- generate uuid and past undder the cursor (very usefull in tests)
 k.set("n", "<leader>uu", function()

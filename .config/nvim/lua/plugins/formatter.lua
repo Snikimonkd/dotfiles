@@ -19,20 +19,20 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				-- go = { "gofumpt" },
-				go = { "gofmt", "goimports", "golines" },
+				go = { "gofmt", "goimports-reviser", "golines" },
 				json = { "fixjson" },
 				proto = { "buf" },
 				["_"] = { "trim_whitespace" },
 			},
-			format_on_save = function(bufnr)
-				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-					return
-				else
-					return {
-						lsp_fallback = true,
-					}
-				end
-			end,
+			--	format_on_save = function(bufnr)
+			--		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+			--			return
+			--		else
+			--			return {
+			--				lsp_fallback = true,
+			--			}
+			--		end
+			--	end,
 			format_after_save = function(bufnr)
 				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 					return

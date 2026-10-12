@@ -156,3 +156,8 @@ precmd() {
     CUR_DIR=$(pwd | awk -F "/" '{print $NF}')
     echo -en "\e]2;${CUR_DIR}\a"
 }
+
+export PATH=$PATH:~/.o3-cli/bin
+
+# Created by `pipx` on 2026-05-25 12:59:17
+export PATH="$PATH:/Users/slukash/.local/bin"

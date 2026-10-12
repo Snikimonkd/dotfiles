@@ -1,4 +1,16 @@
 return {
+    --    {
+    --        "lukas-reineke/lsp-format.nvim",
+    --        config = function()
+    --            require("lsp-format").setup({})
+    --            vim.api.nvim_create_autocmd('LspAttach', {
+    --                callback = function(args)
+    --                    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    --                    require("lsp-format").on_attach(client, args.buf)
+    --                end,
+    --            })
+    --        end
+    --    },
     {
         "neovim/nvim-lspconfig",
         dependecies = {
@@ -58,7 +70,7 @@ return {
                 settings = {
                     gopls = {
                         gofumpt = true,
-                        buildFlags = { "-tags=integration,integration_pg,integration_cassandra,integration_keydb,unit,db" },
+                        buildFlags = { "-tags=integration,integration_pg,integration_cassandra,integration_keydb,unit,db,documentation" },
                         analyses = {
                             append = true,
                             asmdecl = true,
@@ -108,28 +120,28 @@ return {
             })
             vim.lsp.enable({ "gopls" })
 
----            vim.api.nvim_create_autocmd("BufWritePre", {
----                pattern = "*.go",
----                callback = function()
----                    local gopls = vim.lsp.get_clients({ bufnr = 0, name = 'gopls' })
----                    if not gopls then
----                        return
----                    end
----                    local params = vim.lsp.util.make_range_params(0, gopls[1].offset_encoding)
----                    params['context'] = { only = {"source.organizeImports"} }
----
----                    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
----                    for cid, res in pairs(result or {}) do
----                        for _, r in pairs(res.result or {}) do
----                            if r.edit then
----                                local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
----                                vim.lsp.util.apply_workspace_edit(r.edit, enc)
----                            end
----                        end
----                    end
----                    vim.lsp.buf.format({ async = false })
----                end
----            })
+--            vim.api.nvim_create_autocmd("BufWritePre", {
+--                pattern = "*.go",
+--                callback = function()
+--                    local clients = vim.lsp.get_clients()
+--                    for _, cli in ipairs(clients) do
+--                        local method = "textDocument/formatting"
+--                        local handler = function (err, result, ctx)
+--                            if err ~= nil then
+--                                vim.lsp.log.error(string.format("lsp format error: %d: %s", err.code, err.message))
+--                                return
+--                            end
+--                            if result == nil then
+--                                return
+--                            end
+--                            vim.lsp.util.apply_text_edits(result, ctx.bufnr, "utf-16")
+--                        end
+--                        local params = {}
+--                        cli:request(method, params, handler, 0)
+--                        --                    vim.lsp.buf.format({ async = false })
+--                    end
+--                end
+--            })
 
             vim.lsp.config("buf_ls", {
                 capabilities = lsp_capabilities,
