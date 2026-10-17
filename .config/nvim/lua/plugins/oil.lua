@@ -7,15 +7,11 @@ return {
 		columns = {
 			{ "icon", directory = "\u{e5ff}", default_file = "\u{f0f6}" },
 		},
+		-- border comes from vim.o.winborder
 		float = {
-			max_width = 100,
-			max_height = 100,
-			-- nil means vim.o.winborder, which is empty by default
-			border = "rounded",
-		},
-		-- popup with pending changes on save
-		confirmation = {
-			border = "rounded",
+			-- same ratios as the nvim-tree float
+			max_width = 0.5,
+			max_height = 0.8,
 		},
 		view_options = {
 			show_hidden = true,

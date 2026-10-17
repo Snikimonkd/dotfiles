@@ -13,3 +13,10 @@ vim.api.nvim_create_autocmd("VimEnter", {
 		end
 	end,
 })
+
+-- highlight yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.hl.on_yank()
+	end,
+})

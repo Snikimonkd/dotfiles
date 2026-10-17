@@ -2,12 +2,11 @@ vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "red" })
 vim.fn.sign_define("DapStopped", { text = "→", texthl = "red" })
 
 return {
-	-- debug
+	-- debug: everything loads on the first dap key, see keys below
 	{
 		"julianolf/nvim-dap-lldb",
-		dependencies = {
-			"mfussenegger/nvim-dap",
-		},
+		-- loaded as a dependency of nvim-dap
+		lazy = true,
 		config = function()
 			local cfg = {
 				configurations = {
@@ -38,39 +37,86 @@ return {
 	},
 	{
 		"leoluz/nvim-dap-go",
+		-- loaded as a dependency of nvim-dap
+		lazy = true,
 		config = function()
 			require("dap-go").setup({
 				delve = {
-					build_flags = "-tags=integration,integration_pg,integration_cassandra,integration_keydb,unit,db,documentation",
-					args = {
-						["max-string-len"] = 1000,
-					},
+					build_flags = "-tags=" .. require("go_tags"),
 				},
 			})
 		end,
 	},
 	{
 		"mfussenegger/nvim-dap",
+		-- adapters must be registered before the first session
 		dependencies = {
 			"leoluz/nvim-dap-go",
+			"julianolf/nvim-dap-lldb",
 		},
-		config = function()
-			-- vim.print(vim.inspect(require("dap-go").get_arguments()))
-			vim.keymap.set("n", "<leader>bp", ":DapToggleBreakpoint<CR>")
-
-			vim.keymap.set("n", "<leader>dk", function()
-				require("dap.ui.widgets").hover()
-			end)
-			vim.keymap.set("n", "<leader>sc", require("dap").continue)
-			vim.keymap.set("n", "<leader>so", require("dap").step_over)
-			vim.keymap.set("n", "<leader>si", require("dap").step_into)
-		end,
+		-- vim.print(vim.inspect(require("dap-go").get_arguments()))
+		keys = {
+			{ "<leader>bp", ":DapToggleBreakpoint<CR>" },
+			{
+				"<leader>dk",
+				function()
+					require("dap.ui.widgets").hover()
+				end,
+			},
+			{
+				"<leader>sc",
+				function()
+					require("dap").continue()
+				end,
+			},
+			{
+				"<leader>so",
+				function()
+					require("dap").step_over()
+				end,
+			},
+			{
+				"<leader>si",
+				function()
+					require("dap").step_into()
+				end,
+			},
+		},
 	},
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"mfussenegger/nvim-dap",
+		},
+		keys = {
+			{
+				"<leader>dt",
+				function()
+					-- merged into the launch config:
+					-- GOMAXPROCS=1 makes go test run t.Parallel() cases one by one (-parallel
+					-- defaults to GOMAXPROCS), so stepping is not interrupted by a breakpoint
+					-- in a sibling case; maxStringLen is a delve launch option (default 512)
+					require("dap-go").debug_test({
+						env = { GOMAXPROCS = "1" },
+						maxStringLen = 1000,
+					})
+					require("dapui").open()
+				end,
+			},
+			{
+				"<leader>do",
+				function()
+					require("dapui").toggle()
+				end,
+			},
+			{
+				"<leader>ds",
+				function()
+					require("dapui").close()
+					require("dap").terminate()
+				end,
+			},
 		},
 		config = function()
 			require("dapui").setup({
@@ -89,7 +135,10 @@ return {
 						terminate = "",
 					},
 				},
-				expand_lines = true,
+				-- the expand float shifts left over the repl for lines wider than the screen,
+				-- wrap long values inside the element windows instead
+				expand_lines = false,
+				wrap = false,
 				layouts = {
 					{
 						elements = {
@@ -109,20 +158,12 @@ return {
 				render = {
 					indent = 1,
 					max_value_lines = 10000,
-					max_type_length = 10000,
+					-- hide the type column: delve sends full import paths there
+					-- (gitlab.ozon.ru/.../handler.Engine), and composite values
+					-- already start with the short type: handler.Engine(*mock.MockEngine) *{...}
+					max_type_length = 0,
 				},
 			})
-
-			vim.keymap.set("n", "<leader>dt", function()
-				require("dap-go").debug_test()
-				require("dapui").open()
-			end)
-
-			vim.keymap.set("n", "<leader>do", require("dapui").toggle)
-			vim.keymap.set("n", "<leader>ds", function()
-				require("dapui").close()
-				require("dap").terminate()
-			end)
 		end,
 	},
 }

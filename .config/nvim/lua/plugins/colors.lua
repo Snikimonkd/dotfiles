@@ -35,6 +35,9 @@ return {
 				-- background color none, :highlight keeps fg (nvim_set_hl would drop it)
 				vim.cmd.highlight("Normal guibg=NONE")
 				vim.cmd.highlight("NormalFloat guibg=NONE")
+				-- dap-ui: the type column is hidden (dap-go.lua), color variable names instead;
+				-- dap-ui itself only sets "hi default", so this link wins
+				vim.api.nvim_set_hl(0, "DapUIVariable", { link = "Aqua" })
 			end,
 		})
 

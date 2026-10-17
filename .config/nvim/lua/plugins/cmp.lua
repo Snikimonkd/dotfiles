@@ -98,6 +98,11 @@ return {
 					},
 				},
 			},
+
+			-- signature help while typing arguments, border from vim.o.winborder
+			signature = {
+				enabled = true,
+			},
 		},
 		opts_extend = { "sources.default" },
 	},

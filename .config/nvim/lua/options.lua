@@ -81,3 +81,12 @@ cabbrev("Q", "q")
 
 -- column for diagnostic not moving
 vim.opt.signcolumn = "yes"
+
+-- keep undo history between sessions
+vim.opt.undofile = true
+
+-- :vsplit opens on the right
+vim.opt.splitright = true
+
+-- default border for floating windows (hover, diagnostics, oil, ...)
+vim.o.winborder = "rounded"

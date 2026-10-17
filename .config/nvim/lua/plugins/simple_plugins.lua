@@ -24,18 +24,21 @@ return {
 	{
 		-- usefull go things
 		"olexsmir/gopher.nvim",
+		ft = "go",
 		opts = {
 			gotests = {
-				template_dir = "/Users/slukash/.config/nvim/lua/plugins/gotests_templates",
+				template_dir = vim.fn.stdpath("config") .. "/lua/plugins/gotests_templates",
 			},
 		},
 	},
 	{
 		"rest-nvim/rest.nvim",
+		ft = "http",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 		},
-		config = function()
+		-- init: must be set before the plugin loads
+		init = function()
 			vim.g.rest_nvim = {
 				response = {
 					hooks = {
@@ -86,6 +89,7 @@ return {
 	{
 		-- run tests
 		"vim-test/vim-test",
+		cmd = { "TestNearest", "TestFile", "TestSuite", "TestLast", "TestVisit" },
 	},
 	{
 		"Snikimonkd/yazmp",

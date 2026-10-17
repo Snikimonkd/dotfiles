@@ -5,6 +5,8 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"Snikimonkd/telescope-git-conflicts.nvim",
+			-- vim.ui.select (code actions etc.) as a telescope picker
+			"nvim-telescope/telescope-ui-select.nvim",
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "make",
@@ -31,6 +33,9 @@ return {
 						override_generic_sorter = true,
 						override_file_sorter = true,
 						case_mode = "smart_case",
+					},
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown(),
 					},
 				},
 				pickers = {
@@ -77,6 +82,7 @@ return {
 			})
 
 			require("telescope").load_extension("fzf")
+			require("telescope").load_extension("ui-select")
 			require("telescope").load_extension("conflicts")
 		end,
 	},

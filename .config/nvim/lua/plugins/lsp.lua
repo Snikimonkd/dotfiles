@@ -15,15 +15,14 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+			-- sets capabilities for all servers via vim.lsp.config("*")
 			"saghen/blink.cmp",
 		},
 		config = function()
 			local keymap = vim.keymap
 
+			-- float border comes from vim.o.winborder
 			vim.diagnostic.config({
-				float = {
-					border = "rounded",
-				},
 				-- show float after default [d ]d [D ]D jumps
 				jump = {
 					on_jump = function(_, bufnr)
@@ -37,16 +36,11 @@ return {
 			keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 			keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
-			-- local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
-
+			-- K is the default vim.lsp.buf.hover()
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)
 					local bufopts = { noremap = true, silent = true, buffer = args.buf }
 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-					vim.keymap.set("n", "K", function()
-						vim.lsp.buf.hover({ border = "rounded" })
-					end, bufopts)
 					--				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
 					-- not <C-k>: it is tmux-navigator up
 					vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, bufopts)
@@ -54,8 +48,9 @@ return {
 					vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
 					vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
 					--				vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+					-- same formatters as on save
 					vim.keymap.set("n", "<space>of", function()
-						vim.lsp.buf.format({ async = true })
+						require("conform").format({ async = true })
 					end, bufopts)
 
 					-- off by default in nvim, kinds are chosen in server settings (gopls hints/codelenses)
@@ -64,22 +59,19 @@ return {
 				end,
 			})
 
+			-- only overrides of nvim-lspconfig defaults below
+
 			vim.lsp.config("c3_lsp", {
-				capabilities = lsp_capabilities,
 				filetypes = { "c3", "c3i", "c3t", "c3l" },
 			})
-			vim.lsp.enable({ "c3_lsp" })
 
 			vim.lsp.config("gopls", {
-				capabilities = lsp_capabilities,
 				-- gomod: tidy/vendor/upgrade_dependency codelenses live in go.mod
 				filetypes = { "go", "gomod" },
 				settings = {
 					gopls = {
-						gofumpt = true,
-						buildFlags = {
-							"-tags=integration,integration_pg,integration_cassandra,integration_keydb,unit,db,documentation",
-						},
+						-- no gofumpt: go is formatted by conform (gofmt chain)
+						buildFlags = { "-tags=" .. require("go_tags") },
 						analyses = {
 							append = true,
 							asmdecl = true,
@@ -102,7 +94,8 @@ return {
 						codelenses = {
 							generate = true,
 							gc_details = true,
-							test = true,
+							-- "run test" shows only "N / N tests failed", use <leader>gt (vim-test)
+							test = false,
 							tidy = true,
 							vendor = true,
 							regenerate_cgo = true,
@@ -127,7 +120,6 @@ return {
 					},
 				},
 			})
-			vim.lsp.enable({ "gopls" })
 
 			--            vim.api.nvim_create_autocmd("BufWritePre", {
 			--                pattern = "*.go",
@@ -153,20 +145,14 @@ return {
 			--            })
 
 			vim.lsp.config("buf_ls", {
-				capabilities = lsp_capabilities,
 				filetypes = { "proto" },
 			})
-			vim.lsp.enable({ "buf_ls" })
 
 			vim.lsp.config("graphql", {
-				capabilities = lsp_capabilities,
 				filetypes = { "graphql" },
 			})
-			vim.lsp.enable({ "graphql" })
 
 			vim.lsp.config("ols", {
-				capabilities = lsp_capabilities,
-				filetypes = { "odin" },
 				init_options = {
 					collections = {
 						{
@@ -176,30 +162,20 @@ return {
 					},
 				},
 			})
-			vim.lsp.enable({ "ols" })
 
 			vim.lsp.config("zls", {
-				capabilities = lsp_capabilities,
 				filetypes = { "zig" },
 			})
-			vim.lsp.enable({ "zls" })
-
-			vim.lsp.config("clangd", {
-				capabilities = lsp_capabilities,
-			})
-			vim.lsp.enable({ "clangd" })
-
-			vim.lsp.config("pyright", {
-				capabilities = lsp_capabilities,
-			})
-			vim.lsp.enable({ "pyright" })
 
 			vim.lsp.config("lua_ls", {
-				capabilities = lsp_capabilities,
 				-- and lua settings work only from here
 				settings = {
 					Lua = {
 						hint = {
+							enable = false,
+						},
+						-- nvim-lspconfig enables "N references" lenses, too noisy
+						codeLens = {
 							enable = false,
 						},
 						-- make the language server recognize "vim" global
@@ -216,7 +192,18 @@ return {
 					},
 				},
 			})
-			vim.lsp.enable({ "lua_ls" })
+
+			vim.lsp.enable({
+				"c3_lsp",
+				"gopls",
+				"buf_ls",
+				"graphql",
+				"ols",
+				"zls",
+				"clangd",
+				"pyright",
+				"lua_ls",
+			})
 		end,
 	},
 }
