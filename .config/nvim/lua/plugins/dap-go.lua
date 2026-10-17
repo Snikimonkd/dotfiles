@@ -135,8 +135,7 @@ return {
 						terminate = "",
 					},
 				},
-				-- the expand float shifts left over the repl for lines wider than the screen,
-				-- wrap long values inside the element windows instead
+				-- the expand float shifts left over the repl for lines wider than the screen
 				expand_lines = false,
 				wrap = false,
 				layouts = {
