@@ -75,13 +75,16 @@ k.set("n", "<leader>bf", builtin.buffers, {})
 k.set("n", "<leader>gs", builtin.git_status, {})
 
 k.set("n", "<leader><leader>ll", "<cmd>source %<CR>")
-k.set("n", "<leader>ll", ".lua<CR>")
+k.set("n", "<leader>ll", ":.lua<CR>")
 k.set("v", "<leader>ll", ":lua<CR>")
 
+-- remove all default gr* maps, otherwise gr waits for timeoutlen
 vim.keymap.del("n", "grr")
 vim.keymap.del("n", "gri")
 vim.keymap.del("n", "gra")
 vim.keymap.del("n", "grn")
+vim.keymap.del("n", "grt")
+vim.keymap.del("n", "grx")
 -- lsp references
 k.set("n", "gr", builtin.lsp_references, {})
 -- lsp implementations
@@ -120,4 +123,5 @@ k.set("n", "-", "<CMD>Oil --float<CR>")
 -- k.set("n", "<c-k>", "<C-w>k")
 -- k.set("n", "<c-l>", "<C-w>l")
 
-k.set("n", "<leader>mp", 'evb"ky:%s/<C-R>k/<C-R>*/g')
+-- replace word under cursor with clipboard in the whole buffer
+k.set("n", "<leader>mp", ":%s/<C-R><C-W>/<C-R>*/g")

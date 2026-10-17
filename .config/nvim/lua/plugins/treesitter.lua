@@ -36,17 +36,8 @@ return {
 			return vim.list_contains(installed, lang)
 		end
 
-		for _, lang in ipairs(ensure_installed) do
-			if not is_installed(lang) then
-				require("nvim-treesitter").install({ lang })
-			end
-		end
-
-		for _, lang in ipairs(ensure_installed) do
-			if not is_installed(lang) then
-				vim.print("treesitter language not installed: " .. lang)
-			end
-		end
+		-- async, already installed languages are skipped
+		require("nvim-treesitter").install(ensure_installed)
 
 		-- start for installed languages
 		vim.api.nvim_create_autocmd("FileType", {
@@ -55,7 +46,7 @@ return {
 				local lang = vim.treesitter.language.get_lang(ft)
 
 				if is_installed(lang) then
-					vim.treesitter.start()
+					vim.treesitter.start(args.buf, lang)
 				end
 			end,
 		})

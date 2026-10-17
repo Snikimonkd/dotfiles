@@ -9,6 +9,7 @@ return {
 		custom_theme.replace.c.bg = "None"
 		custom_theme.insert.c.bg = "None"
 		custom_theme.command.c.bg = "None"
+		custom_theme.terminal.c.bg = "None"
 		require("lualine").setup({
 			options = {
 				theme = custom_theme,
@@ -39,7 +40,10 @@ return {
 					{
 						"buffers",
 						icons_enabled = false,
-						max_length = vim.o.columns * 9 / 10,
+						-- function, so it follows window resize
+						max_length = function()
+							return vim.o.columns * 9 / 10
+						end,
 						symbols = {
 							alternate_file = "",
 						},

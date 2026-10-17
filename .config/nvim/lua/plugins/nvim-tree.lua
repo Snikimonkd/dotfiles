@@ -5,7 +5,7 @@ return {
 	-- file tree
 	{
 		"nvim-tree/nvim-tree.lua",
-		dependecies = {
+		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
 		opts = {
@@ -38,12 +38,6 @@ return {
 			diagnostics = {
 				enable = true,
 				show_on_dirs = true,
-			},
-			log = {
-				enable = true,
-				types = {
-					diagnostics = true,
-				},
 			},
 		},
 	},

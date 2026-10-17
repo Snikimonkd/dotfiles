@@ -61,17 +61,23 @@ vim.o.laststatus = 3
 vim.o.showmode = false
 
 -- just the most usefull stuf from vim kickstart
-vim.cmd("cnoreabbrev W! w!")
-vim.cmd("cnoreabbrev Q! q!")
-vim.cmd("cnoreabbrev Qall! qall!")
-vim.cmd("cnoreabbrev Wall! wall!")
-vim.cmd("cnoreabbrev Wall wall")
-vim.cmd("cnoreabbrev Wq wq")
-vim.cmd("cnoreabbrev Wa wa")
-vim.cmd("cnoreabbrev wQ wq")
-vim.cmd("cnoreabbrev WQ wq")
-vim.cmd("cnoreabbrev W w")
-vim.cmd("cnoreabbrev Q q")
+-- expand only for a whole ":" command, not inside / or :s
+local function cabbrev(lhs, rhs)
+	vim.keymap.set("ca", lhs, function()
+		return (vim.fn.getcmdtype() == ":" and vim.fn.getcmdline() == lhs) and rhs or lhs
+	end, { expr = true })
+end
+cabbrev("W!", "w!")
+cabbrev("Q!", "q!")
+cabbrev("Qall!", "qall!")
+cabbrev("Wall!", "wall!")
+cabbrev("Wall", "wall")
+cabbrev("Wq", "wq")
+cabbrev("Wa", "wa")
+cabbrev("wQ", "wq")
+cabbrev("WQ", "wq")
+cabbrev("W", "w")
+cabbrev("Q", "q")
 
 -- column for diagnostic not moving
 vim.opt.signcolumn = "yes"

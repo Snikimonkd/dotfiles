@@ -1,6 +1,6 @@
 return {
 	"nvimdev/dashboard-nvim",
-	dependecies = {
+	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
 	priority = 999,

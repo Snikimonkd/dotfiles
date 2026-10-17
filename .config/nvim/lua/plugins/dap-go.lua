@@ -56,11 +56,11 @@ return {
 		},
 		config = function()
 			-- vim.print(vim.inspect(require("dap-go").get_arguments()))
-			require("dap").set_log_level("debug")
-
 			vim.keymap.set("n", "<leader>bp", ":DapToggleBreakpoint<CR>")
 
-			vim.keymap.set("n", "<leader>dk", ":lua require('dap.ui.variables').hover()<CR>")
+			vim.keymap.set("n", "<leader>dk", function()
+				require("dap.ui.widgets").hover()
+			end)
 			vim.keymap.set("n", "<leader>sc", require("dap").continue)
 			vim.keymap.set("n", "<leader>so", require("dap").step_over)
 			vim.keymap.set("n", "<leader>si", require("dap").step_into)

@@ -1,17 +1,28 @@
 return {
 	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "make",
-	},
-	{
 		-- search
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"Snikimonkd/telescope-git-conflicts.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+			},
 		},
 		config = function()
-			local ignore = { ".git/", "vendor", "bin", "go.sum", ".*pb.*go", ".*swagger.json" }
+			-- lua patterns, matched anywhere in the path
+			local ignore = {
+				"^%.git/",
+				"/%.git/",
+				"^vendor/",
+				"/vendor/",
+				"^bin/",
+				"/bin/",
+				"go%.sum$",
+				"pb.*%.go$",
+				"swagger%.json$",
+			}
 			local actions = require("telescope.actions")
 			require("telescope").setup({
 				extensions = {
@@ -43,13 +54,19 @@ return {
 						fname_width = 9999,
 						show_line = false,
 					},
+					buffers = {
+						mappings = {
+							i = {
+								["<C-x>"] = actions.delete_buffer,
+							},
+						},
+					},
 				},
 				defaults = {
 					mappings = {
 						i = {
 							["<C-j>"] = actions.move_selection_next,
 							["<C-k>"] = actions.move_selection_previous,
-							["<C-x>"] = actions.delete_buffer,
 						},
 					},
 					layout_strategy = "vertical",
@@ -59,6 +76,7 @@ return {
 				},
 			})
 
+			require("telescope").load_extension("fzf")
 			require("telescope").load_extension("conflicts")
 		end,
 	},

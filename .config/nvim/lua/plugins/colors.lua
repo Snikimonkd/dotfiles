@@ -19,24 +19,25 @@ return {
 		-- For better performance
 		vim.g.gruvbox_material_better_performance = 1
 
-		vim.cmd.colorscheme("gruvbox-material")
+		-- reapply overrides after every :colorscheme
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			callback = function()
+				-- boarder of floating windows
+				vim.api.nvim_set_hl(0, "FloatBorder", {
+					fg = "Grey",
+					bg = "none",
+				})
+				-- title of floating windows
+				vim.api.nvim_set_hl(0, "FloatTitle", {
+					fg = "Grey",
+					bg = "none",
+				})
+				-- background color none, :highlight keeps fg (nvim_set_hl would drop it)
+				vim.cmd.highlight("Normal guibg=NONE")
+				vim.cmd.highlight("NormalFloat guibg=NONE")
+			end,
+		})
 
-		-- boarder of floating windows
-		vim.api.nvim_set_hl(0, "FloatBorder", {
-			fg = "Grey",
-			bg = "none",
-		})
-		-- title of floating windows
-		vim.api.nvim_set_hl(0, "FloatTitle", {
-			fg = "Grey",
-			bg = "none",
-		})
-		-- background color none
-		vim.api.nvim_set_hl(0, "Normal", {
-			bg = "none",
-		})
-		vim.api.nvim_set_hl(0, "NormalFloat", {
-			bg = "none",
-		})
+		vim.cmd.colorscheme("gruvbox-material")
 	end,
 }

@@ -1,7 +1,7 @@
 return {
 	{
 		"saghen/blink.cmp",
-		dependecies = {
+		dependencies = {
 			"Snikimonkd/blink-cmp-go-pkgs",
 		},
 		--		lazy = false, -- lazy loading handled internally
